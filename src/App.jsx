@@ -1,15 +1,26 @@
-import { useAddress, useMetamask, useEditionDrop } from "@thirdweb-dev/react";
+import { useAddress, useMetamask, useEditionDrop, useToken } from "@thirdweb-dev/react";
 import { useState, useEffect } from 'react';
 
 
 
-const App = () => {
 
+
+const App = () => {
+  
   const address = useAddress();
+  const token = useToken("0xde4f1fd54d980616ddBf28754cB2165b93Da47d3");
   const connectWithWallet = useMetamask();
   const editionDrop = useEditionDrop("0x8E06BAF61D3fA40204f8331BcdD26817155A3E52");
   const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
+
+  const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
+  const [memberAddresses, setMemberAddresses] = useState([]);
+
+
+  const shortAddress = (str) =>{
+    return str.substring(0,6) + "..."+str.substring(str.length-4,str.length);
+  }
 
 
   useEffect(() => {
@@ -47,6 +58,32 @@ const App = () => {
   }, [address, editionDrop])
 
 
+
+  useEffect(() => {
+     if(!hasClaimedNFT)
+     return;
+
+     const getAllBAlances = async () => {
+
+      try{
+        const amounts= await token.history.getAllHolderBalances();
+        console.log(amounts);
+
+      }
+      catch(error)
+      {
+        console.loh("Failed to get balances.",error);
+      }
+
+
+
+     }
+
+     getAllBAlances()
+   
+
+  
+  },[token.history,hasClaimedNFT])
 
   const mint = async () => {
 
