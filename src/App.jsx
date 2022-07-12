@@ -1,5 +1,5 @@
 import { useAddress, useMetamask, useEditionDrop, useToken } from "@thirdweb-dev/react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect ,useMemo} from 'react';
 
 
 
@@ -21,6 +21,25 @@ const App = () => {
   const shortAddress = (str) =>{
     return str.substring(0,6) + "..."+str.substring(str.length-4,str.length);
   }
+
+  useEffect(() => {
+    if (!hasClaimedNFT) {
+      return;
+    }
+  const getAllClaimerAddresses = async () => {
+    try {
+
+      const walletAddresses = await editionDrop.history.getAllClaimerAddresses(0);
+      setMemberAddresses(walletAddresses);
+    }
+    catch (err) {
+      console.error("Failed to get all claimer addresses", err);
+    }
+
+  }
+  getAllClaimerAddresses();
+}, [hasClaimedNFT, editionDrop.history]);
+
 
 
   useEffect(() => {
@@ -59,6 +78,8 @@ const App = () => {
 
 
 
+  //function to get all the token amounts of the members
+
   useEffect(() => {
      if(!hasClaimedNFT)
      return;
@@ -68,6 +89,7 @@ const App = () => {
       try{
         const amounts= await token.history.getAllHolderBalances();
         console.log(amounts);
+        setMemberTokenAmounts(amounts);
 
       }
       catch(error)
@@ -84,6 +106,21 @@ const App = () => {
 
   
   },[token.history,hasClaimedNFT])
+
+  const memberList = useMemo(()=>{
+
+   return  memberAddresses.map((address)=>{
+
+      const member = memberTokenAmounts.find(({holder})=>holder===address)
+      
+      return {
+        address,
+        tokenAmount:member?.balance.displayValue||"0", 
+      }
+    })
+    
+
+  },[memberAddresses,memberTokenAmounts])
 
   const mint = async () => {
 
@@ -115,8 +152,26 @@ const App = () => {
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
-        <h1>🍪DAO Member Page</h1>
+        <h1>♟ DAO Member Page</h1>
         <p>Congratulations on being a member</p>
+        <table className="card">
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>Token Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {memberList.map((member) => {
+                return (
+                  <tr key={member.address}>
+                    <td>{shortAddress(member.address)}</td>
+                    <td>{member.tokenAmount}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
       </div>
     );
   };
