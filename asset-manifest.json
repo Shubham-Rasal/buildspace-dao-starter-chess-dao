@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Shubham-Rasal/buildspace-dao-starter-chess-dao/static/css/main.b46c0681.css",
+    "main.js": "/Shubham-Rasal/buildspace-dao-starter-chess-dao/static/js/main.46fa4279.js",
+    "index.html": "/Shubham-Rasal/buildspace-dao-starter-chess-dao/index.html",
+    "main.b46c0681.css.map": "/Shubham-Rasal/buildspace-dao-starter-chess-dao/static/css/main.b46c0681.css.map",
+    "main.46fa4279.js.map": "/Shubham-Rasal/buildspace-dao-starter-chess-dao/static/js/main.46fa4279.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b46c0681.css",
+    "static/js/main.46fa4279.js"
+  ]
+}
