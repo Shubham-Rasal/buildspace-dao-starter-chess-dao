@@ -7,32 +7,32 @@ const vote = sdk.getVote("0x9E83d8BA6ff6cCB16F24cc9Ea251386AbeaA307C");
 const token = sdk.getToken("0xde4f1fd54d980616ddBf28754cB2165b93Da47d3");
 
 (async () => {
-    try {
+    // try {
 
-        const amount = 410_000;
-        const description = "Should we mint more tokens?";
-        const executions = [
-            {
-                toAddress: token.getAddress(),
-                nativeTokenValue: 0,
+    //     const amount = 410_000;
+    //     const description = "Should we mint more tokens?";
+    //     const executions = [
+    //         {
+    //             toAddress: token.getAddress(),
+    //             nativeTokenValue: 0,
 
-                transactionData: token.encoder.encode(
-                    "mintTo",
-                    [
-                        vote.getAddress(),
-                        ethers.utils.parseEther(amount.toString(), 18),
-                    ]
-                ),
-            },
-        ];
+    //             transactionData: token.encoder.encode(
+    //                 "mintTo",
+    //                 [
+    //                     vote.getAddress(),
+    //                     ethers.utils.parseEther(amount.toString(), 18),
+    //                 ]
+    //             ),
+    //         },
+    //     ];
 
-        await vote.propose(description, executions);
-        console.log("✅ Successfully created minting to treasury proposal");
-    }
-    catch (err) {
-        console.log("Could not declare proposals.", err);
-        process.exit(1);
-    }
+    //     await vote.propose(description, executions);
+    //     console.log("✅ Successfully created minting to treasury proposal");
+    // }
+    // catch (err) {
+    //     console.log("Could not declare proposals.", err);
+    //     process.exit(1);
+    // }
 
 
 

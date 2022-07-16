@@ -4,8 +4,8 @@ body {
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #00c3ce;
-  color: #fff;
+  background-color: #464646;
+  color: rgb(175, 169, 169);
   overflow-x: hidden;
 }
 #root {
@@ -107,7 +107,7 @@ h1 {
 }
 
 .card {
-  background-color: #fff;
+  background-color: rgba(198, 198, 198, 0.459);
   padding: 1rem;
   border-radius: 1rem;
   color: #000;

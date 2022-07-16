@@ -7,10 +7,11 @@ const token = sdk.getToken("0xde4f1fd54d980616ddBf28754cB2165b93Da47d3");
     try {
 
         const allRoles  = await token.roles.getAll();
+        console.log(token.roles.get("minter"));
 
         console.log("All roles ", allRoles);
 
-        await token.roles.setAll({admin:[],minter:[]});
+        await token.roles.setAll({admin:[to],minter:[token.getAddress()]});
 
         console.log("All roles ", await token.roles.getAll());
 
