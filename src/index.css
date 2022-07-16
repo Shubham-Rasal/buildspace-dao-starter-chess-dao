@@ -91,7 +91,7 @@ h1 {
   gap: 1rem;
 }
 
-.member-page form h5 {
+.member-page form h5,h3{
   margin-top: 0;
   color: #7700ee;
 }
